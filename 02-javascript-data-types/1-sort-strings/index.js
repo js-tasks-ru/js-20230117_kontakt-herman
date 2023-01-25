@@ -5,9 +5,18 @@
  * @returns {string[]}
  */
 export function sortStrings(arr, param = 'asc') {
-    if (param === 'asc') {
-        return [...arr].sort((a, b) => a.localeCompare(b, 'ru-en-u-kf-upper'));
+    const compare = (string1, string2) => string1.localeCompare(string2, ['ru', 'en'], { caseFirst: 'upper' })
+
+    if (typeof param === 'undefined') {
+        throw new Error('parameter does not match')
     }
 
-    return [...arr].sort((a, b) => b.localeCompare(a, 'ru-en-u-kf-upper'));
+    return [...arr].sort((a, b) => {
+        if (param === 'asc') {
+            return compare(a, b);
+        }
+        if (param === 'desc') {
+            return compare(b, a)
+        }
+    })
 }
