@@ -8,6 +8,6 @@ export function createGetter(path) {
 
     return (object) => {
         const valueInObj = keys.reduce((acc, item) => (acc === undefined) ? acc : acc[item], object);
-        return (valueInObj === undefined) ? undefined : valueInObj;
+        return valueInObj
     }
 }
